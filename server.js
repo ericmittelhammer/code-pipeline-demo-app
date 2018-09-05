@@ -5,6 +5,10 @@ const bodyParser = require('body-parser');
 const { getRates, getSymbols, getHistoricalRate } = require('./lib/fixer-service');
 const { convertCurrency } = require('./lib/free-currency-service');
 
+
+const build = require('./build-info');
+newrelic.addCustomAttributes(build);
+
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -82,6 +86,10 @@ app.post('/api/historical', async (req, res) => {
     errorHandler(error, req, res);
   }
 });
+
+app.get('/build', async (req, res) => {
+  res.send(build);
+})
 
 // Redirect all traffic to index.html
 app.use((req, res) => res.sendFile(`${__dirname}/public/index.html`));
