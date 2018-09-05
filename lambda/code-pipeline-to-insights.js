@@ -18,39 +18,27 @@ exports.handler = (event) => {
 
     const payload = { 
         eventType: 'codepipeline:statechange',
+        id: event.id,
         version: event.version,
         detailType: event['detail-type'],
         source: event.source,
         account: event.account,
         time: event.time,
-        region: event.region
+        region: event.region,
+        'detail.pipeline': event.detail.pipeline,
+        'detail.version': event.detail.version,
+        'detail.executionId': event.detail['execution-id'],
+        'detail.stage': event.detail.stage,
+        'detail.action': event.detail.action,
+        'detail.state': event.detail.state,
     };
     
-    if (event.detail !== undefined) {
-        
-        const detail = {
-            pipeline: event.detail.pipeline,
-            version: event.detail.version,
-            executionId: event.detail['execution-id'],
-            stage: event.detail.stage,
-            action: event.detail.action,
-            state: event.detail.state,
-        }
-        
-        if (event.detail.type !== undefined) {
-            const _type = {
-                owner: event.detail.type.owner,
-                category: event.detail.type.category,
-                provider: event.detail.type.provider,
-                version: event.detail.type.version
-            }
-            detail.type = _type;
-        }
-        
-        payload.detail = detail;
-    
+    if (event.detail.type !== undefined) {
+        payload['detail.type.owner'] = event.detail.type.owner;
+        payload['detail.type.category'] = event.detail.type.category;
+        payload['detail.type.provider'] = event.detail.type.provider;
+        payload['detail.type.version'] = event.detail.type.version;
     }
-    
     
     return new Promise((resolve, reject) => {
 
