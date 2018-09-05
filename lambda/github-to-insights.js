@@ -6,6 +6,8 @@
 const http = require('https');
 
 exports.handler = (event) => {
+    
+    let body = JSON.parse(event.body);
 
     const options = {
         hostname: 'insights-collector.newrelic.com',
@@ -19,13 +21,23 @@ exports.handler = (event) => {
 
     const payload = { 
         eventType: 'github:push',
-        ref: event.body.ref,
-        before: event.body.after,
-        repository: event.body.repository,
-        name: event.body.pusher.name,
-
-
+        ref: body.ref,
+        before: body.before,
+        after: body.after,
+        created: body.created,
+        deleted: body.deleted,
+        forced: body.forced,
+        base_ref: body.base_ref,
+        compare: body.compare,
+        'repository.id': body.repository.id,
+        'repository.full_name': body.repository.full_name,
+        'repository.html_url': body.repository.html_url,
+        'repository.open_issues_count': body.repository.open_issues_count,
+        'pusher.name': body.pusher.name,
+        'pusher.email': body.pusher.email,
+        
     };
+    
     
     return new Promise((resolve, reject) => {
 
@@ -33,22 +45,17 @@ exports.handler = (event) => {
             var responseBody = '';
             res.on('data',(chunk) => responseBody = responseBody += chunk);
             res.on('end', () => {
-                if (res.statusCode >= 200 && res.statusCode < 300) {
-                    resolve(`Insights insert request completed with statusCode: ${res.statusCode}, message: ${res.statusMessage}, body: ${responseBody}`);
-                } else {
-                    reject(`Insights insert request failed with statusCode: ${res.statusCode}, message: ${res.statusMessage}, body: ${responseBody}`);
-                }             
+                    resolve({
+                        statusCode: res.statusCode,
+                        body: responseBody
+                    });
             });
         });
 
         req.on('error', (e) => {
           reject(`Insights insert request failed: ${e}`);
         });
-        
-        req.on('close', () => {
-            console.log('request done');
-        });
-    
+
         // write data to request body
         req.write(JSON.stringify(payload));
         req.end();
