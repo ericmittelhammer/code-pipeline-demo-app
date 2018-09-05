@@ -1,5 +1,5 @@
 require('dotenv').config();
-require('newrelic');
+const newrelic = require('newrelic');
 const express = require('express');
 const bodyParser = require('body-parser');
 const { getRates, getSymbols, getHistoricalRate } = require('./lib/fixer-service');
