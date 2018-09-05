@@ -1,5 +1,4 @@
-// AWS Lambda function that formats a CodeDeploy pipeline state change event https://docs.aws.amazon.com/codepipeline/latest/userguide/detect-state-changes-cloudwatch-events.html
-// into an Insights event
+// AWS Lambda function that formats a CodeDeploy pipeline state change event https://docs.aws.amazon.com/codepipeline/latest/userguide/detect-state-changes-cloudwatch-events.html// into an Insights event
 
 // No external dependencies; can be installed directly in the AWS Console
 
@@ -24,18 +23,33 @@ exports.handler = (event) => {
         source: event.source,
         account: event.account,
         time: event.time,
-        region: event.region,
-        'detail.pipeline': event.detail.pipeline,
-        'detail.version': event.detail.version,
-        'detail.executionId': event.detail['execution-id'],
-        'detail.stage': event.detail.stage,
-        'detail.action': event.detail.action,
-        'detail.state': event.detail.state,
-        'detail.type.owner': event.detail.type.owner,
-        'detail.type.category': event.detail.type.category,
-        'detail.type.provider': event.detail.type.provider,
-        'detail.type.version': event.detail.type.version
+        region: event.region
     };
+    
+    if (event.detail !== undefined) {
+        
+        const detail = {
+            pipeline: event.detail.pipeline,
+            version: event.detail.version,
+            executionId: event.detail['execution-id'],
+            stage: event.detail.stage,
+            action: event.detail.action,
+            state: event.detail.state,
+        }
+        
+        if (event.detail.type !== undefined) {
+            const _type = {
+                owner: event.detail.type.owner,
+                category: event.detail.type.category,
+                provider: event.detail.type.provider,
+                version: event.detail.type.version
+            }
+            detail.type = _type;
+        }
+        
+        payload.detail = detail;
+    
+    }
     
     
     return new Promise((resolve, reject) => {
