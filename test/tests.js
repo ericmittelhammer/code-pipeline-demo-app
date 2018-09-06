@@ -8,9 +8,9 @@ const FAIL_THRESHOLD = (process.env['FAIL_THRESHOLD'] !== undefined) ? parseFloa
 const FAIL_MODE = Math.random() < FAIL_SWITCH;
 
 describe(`generating ${NUM_TESTS} tests`, () => {
-    console.log('FAIL_SWITCH', FAIL_SWITCH);
-    console.log('FAIL_THRESHOLD', FAIL_THRESHOLD);
-    console.log('FAIL_MODE', FAIL_MODE);
+    // console.log('FAIL_SWITCH', FAIL_SWITCH);
+    // console.log('FAIL_THRESHOLD', FAIL_THRESHOLD);
+    // console.log('FAIL_MODE', FAIL_MODE);
     for (let i = 0; i < NUM_TESTS; i++) {
         it(`Test #${i}`, () => {
             if(FAIL_MODE) {
