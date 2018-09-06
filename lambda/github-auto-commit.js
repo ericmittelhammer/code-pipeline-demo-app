@@ -119,7 +119,7 @@ exports.handler = (event) => {
 
             const payload = {
                 message: `auto commit from AWS Lambda event:
-                ${JSON.stringify(event)}`,
+                ${JSON.stringify(event, null, 4)}`,
                 committer: {
                     name: newContents.commit.committer.name,
                     email: newContents.commit.committer.email
