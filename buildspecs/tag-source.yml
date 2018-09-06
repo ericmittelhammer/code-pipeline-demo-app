@@ -3,7 +3,7 @@ version: 0.2
 phases:
   build:
     commands:
-      - 'node build_events/tag-build.js > build-info.js'
+      - 'node build_events/tag-source.js > build-info.json'
 
 artifacts:
   files:

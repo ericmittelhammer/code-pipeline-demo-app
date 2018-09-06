@@ -7,10 +7,13 @@ const { convertCurrency } = require('./lib/free-currency-service');
 
 
 const build = require('./build-info');
-newrelic.addCustomAttributes(build);
+
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+// add custom attributes to all routes
+app.use((req, res) => {newrelic.addCustomAttributes(build);});
 
 // Set public folder as root
 app.use(express.static('public'));
