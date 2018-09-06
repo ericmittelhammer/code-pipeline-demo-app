@@ -105,7 +105,7 @@ exports.handler = (event) => {
             };
 
             // will this committer introduce failing tests?
-            if (Math.random < SHOULD_FAIL) {
+            if (Math.random() < SHOULD_FAIL) {
                 newContents.failMode = true;
                 newContents.failRate = Math.random();
             } else {
