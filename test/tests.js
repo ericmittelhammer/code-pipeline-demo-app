@@ -7,8 +7,6 @@ const FAIL_MODE = (process.env['FAIL_MODE'] !== undefined) ? (process.env['FAIL_
 const FAIL_RATE = (process.env['FAIL_RATE'] !== undefined) ? parseFloat(process.env['FAIL_RATE']) : testConfig.failRate;
 
 describe(`generating ${NUM_TESTS} tests`, () => {
-    console.log('FAIL_RATE', FAIL_RATE);
-    console.log('FAIL_MODE', FAIL_MODE);
     for (let i = 0; i < NUM_TESTS; i++) {
         it(`Test #${i}`, () => {
             if(FAIL_MODE) {
