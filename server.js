@@ -13,7 +13,10 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // add custom attributes to all routes
-app.use((req, res) => {newrelic.addCustomAttributes(build);});
+app.use((res, req, next) => {
+  newrelic.addCustomAttributes(build);
+  next();
+});
 
 // Set public folder as root
 app.use(express.static('public'));
