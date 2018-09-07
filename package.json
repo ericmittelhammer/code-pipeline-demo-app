@@ -1,27 +1,22 @@
 {
-  "name": "single-page-application",
+  "name": "code-pipeline-demo-app",
   "version": "1.0.0",
-  "description": "This is a demo project for beginners showing them how to build a Single Page Application without using a popular framework such as React, Angular, Vue, Ember or Backbone.js.",
+  "description": "A simple demo application that will demonstrate how to instrument and measure your code pipeline",
   "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha test/tests.js",
     "start": "node server.js"
   },
-  "keywords": [],
-  "author": "Michael Wanyoike",
-  "license": "MIT",
+  "author": "Eric Mittelhammer <emittelhammer@newrelic.com>",
+  "license": "ISC",
   "dependencies": {
     "@newrelic/native-metrics": "^3.1.0",
-    "axios": "^0.18.0",
-    "body-parser": "^1.18.2",
-    "dotenv": "^5.0.1",
-    "express": "^4.16.3",
-    "handlebars": "^4.0.11",
-    "jquery": "^3.3.1",
-    "newrelic": "^4.8.0",
-    "semantic-ui-calendar": "0.0.8",
-    "semantic-ui-css": "^2.3.1",
-    "vanilla-router": "^1.2.6"
+    "koa": "^2.5.2",
+    "koa-router": "^7.4.0",
+    "newrelic": "^4.8.1"
   },
   "devDependencies": {
     "mocha": "^5.2.0"
