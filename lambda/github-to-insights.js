@@ -35,6 +35,8 @@ exports.handler = (event) => {
         'repository.open_issues_count': body.repository.open_issues_count,
         'pusher.name': body.pusher.name,
         'pusher.email': body.pusher.email,
+        'committer.name': body.head_commit.committer.name,
+        'committer.email': body.head_commit.committer.email
         
     };
     
