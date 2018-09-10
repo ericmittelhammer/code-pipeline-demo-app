@@ -1,7 +1,7 @@
+// takes the test results written by CodeBuild and sends them to Insights
+
 const http = require('https');
 const testStats = require('./testStats');
-
-// send test stats to New Relic
 
 const options = {
     hostname: 'insights-collector.newrelic.com',
