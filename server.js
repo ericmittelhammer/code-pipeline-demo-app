@@ -1,4 +1,5 @@
-const newrelic = require('@newrelic/koa');
+require('@newrelic/koa');
+const newrelic = require('newrelic');
 const Koa = require('koa');
 const Router = require('koa-router');
 
