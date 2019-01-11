@@ -1,9 +1,9 @@
 {
     "commit": {
         "committer": {
-            "date": "2019-01-11T12:55:00.602Z",
-            "name": "Developer Two",
-            "email": "developertwo@example.com"
+            "date": "2019-01-11T13:01:00.382Z",
+            "name": "Developer Three",
+            "email": "developerthree@example.com"
         }
     },
     "failMode": false,
